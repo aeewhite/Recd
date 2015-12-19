@@ -2,8 +2,16 @@
   "name": "AudioStream",
   "version": "1.0.0",
   "description": "Record audio from m3u playlist",
-  "main": "app.js",
+  "main": "./html/index.html",
   "author": "Andrew White",
+  "tags": ["audio","stream","recorder","mp3"],
+  "window":{
+  	"title": "AudioStream",
+  	"toolbar": false,
+  	"width": 500,
+  	"height": 200,
+  	"position": "mouse"
+  },
   "dependencies": {
     "request": "^2.67.0"
   }
