@@ -1,0 +1,10 @@
+{
+  "name": "AudioStream",
+  "version": "1.0.0",
+  "description": "Record audio from m3u playlist",
+  "main": "app.js",
+  "author": "Andrew White",
+  "dependencies": {
+    "request": "^2.67.0"
+  }
+}
