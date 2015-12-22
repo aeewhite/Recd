@@ -25,6 +25,7 @@ $('#start').click(function(){
 
 	stream.on('error', function(err) {
 		console.log('something is wrong :( ');
+		console.log(err);
 		writeStream.close();
 	});
 });
