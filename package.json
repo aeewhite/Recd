@@ -16,6 +16,7 @@
   "window": {
     "title": "AudioStream",
     "toolbar": false,
+    "resizable": false,
     "width": 500,
     "height": 200,
     "position": "mouse"
