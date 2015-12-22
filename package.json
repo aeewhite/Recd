@@ -10,6 +10,9 @@
     "recorder",
     "mp3"
   ],
+  "scripts": {
+    "start": "nw ."
+  },
   "window": {
     "title": "AudioStream",
     "toolbar": false,
