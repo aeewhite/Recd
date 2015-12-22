@@ -11,7 +11,8 @@
     "mp3"
   ],
   "scripts": {
-    "start": "nw ."
+    "start": "nw .",
+    "build": "grunt package"
   },
   "window": {
     "title": "AudioStream",
