@@ -6,10 +6,11 @@ module.exports = function(grunt) {
 			options: {
 				platforms: ['osx64'],
 				buildDir: './build', // Where the build version of my NW.js app is saved
-				buildType: "timestamped",
+				buildType: "versioned",
+				version: 'v0.12.3'
 			},
-			src: ['./**/*',"!build"] // Your NW.js app
-			},
+			src: ['**/*',"!build/**/*","!node_modules/grunt/**/*","!node_modules/grunt-nw-builder/**/*","!cache/**/*"] // Your NW.js app
+		},
 	});
 
 	grunt.loadNpmTasks('grunt-nw-builder');
