@@ -1,6 +1,6 @@
 {
   "name": "AudioStream",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Record audio from m3u playlist",
   "main": "./html/index.html",
   "author": "Andrew White",
