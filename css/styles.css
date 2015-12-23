@@ -1,14 +1,25 @@
 /* apply a natural box layout model to all elements, but allowing components to change */
-html {
+html,body {
 	box-sizing: border-box;
 	font-family: sans-serif;
+	height:100%;
 }
 *, *:before, *:after {
 	box-sizing: inherit;
 }
 
 label {
-	width:80%;
 	display:block;
 	margin:0 auto;
+}
+
+.inputs{
+	width:70%;
+	height: 100%;
+	float:left;
+}
+.stats{
+	width:29%;
+	height:100%;
+	float:right;
 }

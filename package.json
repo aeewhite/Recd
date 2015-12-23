@@ -19,7 +19,7 @@
     "toolbar": false,
     "resizable": false,
     "width": 500,
-    "height": 200,
+    "height": 125,
     "position": "mouse"
   },
   "dependencies": {
