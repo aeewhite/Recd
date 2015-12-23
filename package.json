@@ -1,7 +1,7 @@
 {
-  "name": "AudioStream",
+  "name": "Rec'd",
   "version": "1.0.1",
-  "description": "Record audio from m3u playlist",
+  "description": "Record audio from mp3 stream",
   "main": "./html/index.html",
   "author": "Andrew White",
   "tags": [
@@ -15,7 +15,7 @@
     "build": "grunt package"
   },
   "window": {
-    "title": "AudioStream",
+    "title": "Rec'd",
     "toolbar": false,
     "resizable": false,
     "width": 500,
