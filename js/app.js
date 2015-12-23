@@ -1,3 +1,18 @@
+// Load native UI library
+var gui = require('nw.gui');
+
+// Create menu
+var menu = new gui.Menu({ type: 'menubar' });
+
+// create MacBuiltin
+menu.createMacBuiltin('Sample App',{
+    hideEdit: false,
+    hideWindow: false
+});
+
+// Append Menu to Window
+gui.Window.get().menu = menu;
+
 var fs = require('fs');
 var request = require('request');
 
