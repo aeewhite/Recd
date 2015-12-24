@@ -44,15 +44,18 @@ function startRecording(){
 	var saveLocation = $('#savePath').val();
 
 	// Start the recording
-	streamRecorder.startStreamToFile(streamLocation, saveLocation);
+	var success = streamRecorder.startStreamToFile(streamLocation, saveLocation);
 
-	// Update timer once a second
-	updater = setInterval(function(){
-		$('#elapsedTime').text(streamRecorder.getElapsedTime());
-	},1000);
+	// If starting the stream was successful
+	if(success){
+		// Update timer once a second
+		updater = setInterval(function(){
+			$('#elapsedTime').text(streamRecorder.getElapsedTime());
+		},1000);
 
-	$('#recButton').removeClass("notRec");
-	$('#recButton').addClass("Rec");
+		$('#recButton').removeClass("notRec");
+		$('#recButton').addClass("Rec");
+	}
 }
 
 function stopRecording(){
