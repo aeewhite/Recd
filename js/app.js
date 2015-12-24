@@ -1,99 +1,91 @@
-// Load native UI library
-var gui = require('nw.gui');
+// Global Variables
+var win;
 
-// Create menu
-var menu = new gui.Menu({ type: 'menubar' });
+// Called when app first loads
+function startup (){
+	//  Load native UI library
+	var gui = require('nw.gui');
 
-// create MacBuiltin menubar items
-menu.createMacBuiltin("Rec'd",{
-	hideEdit: false,
-	hideWindow: false
-});
+	// Assign window object
+	win = gui.Window.get();
 
-// Append Menu to Window
-gui.Window.get().menu = menu;
+	// Create menu
+	var menu = new gui.Menu({ type: 'menubar' });
 
-var fs = require('fs');
-var request = require('request');
+	// create MacBuiltin menubar items
+	menu.createMacBuiltin("Rec'd",{
+		hideEdit: false,
+		hideWindow: false
+	});
 
-var recording = false;
-var startTime;
-var timerUpdate;
-var stream;
-var writeStream;
+	// Append Menu to Window
+	win.menu = menu;
 
-var streamLocation;
-var saveLocation;
+	win.on('close', function() {
+		shutDown();
+	});
+
+	// Set up click handling for record button
+	$('#recButton').click(function(){
+		if(!streamRecorder.recording){
+			startRecording();
+		}
+		else{
+			stopRecording();
+		}
+	});
+}
+
+// To be called when app is closing down
+function shutDown(){
+	win.hide(); // Pretend to be closed already
+	stopRecording(); //Clean up/Stop recording
+	win.close(true);
+}
+
+// Path is relative to html file
+var streamRecorder = require('../js/streamRecorder.js');
+
+var updater;
 
 function startRecording(){
 	var streamLocation = $('#fileURL').val();
 	var saveLocation = $('#savePath').val();
 
-	if(streamLocation === "" || saveLocation === ""){
+	// Start the recording
+	var success = streamRecorder.startStreamToFile(streamLocation, saveLocation);
+
+	// If starting the stream was successful
+	if(success){
+		// Update timer once a second
+		updater = setInterval(function(){
+			$('#elapsedTime').text(streamRecorder.getElapsedTime());
+		},1000);
+
+		$('#recButton').removeClass("notRec");
+		$('#recButton').addClass("Rec");
+		return true;
+	}
+	else{
 		return false;
 	}
-
-	stream = request(streamLocation);
-	writeStream = fs.createWriteStream(saveLocation);
-	
-	startTime = new Date().getTime() / 1000;
-	updateElapsedTime();
-	timerUpdate = setInterval(updateElapsedTime, 1000);
-	stream.on('data', function(data) {
-		writeStream.write(data);
-	});
-
-	stream.on('end',function(){
-		writeStream.end();
-	});
-
-	stream.on('error', function(err) {
-		console.log('something is wrong :( ');
-		console.log(err);
-		writeStream.close();
-	});
-	recording = true;
-	$('#recButton').removeClass("notRec");
-	$('#recButton').addClass("Rec");
 }
 
 function stopRecording(){
-	if(recording){
-		stream.end();
-		recording = false;
+	var closed = streamRecorder.stopStreamToFile();
+
+	if(closed){
+		// Stop updating timer
+		clearInterval(updater);
+
 		$('#recButton').removeClass("Rec");
-		$('#recButton').addClass("notRec");
-	}
-	clearInterval(timerUpdate);
-}
-
-function formatTime(d) {
-	d = Number(d);
-	var h = Math.floor(d / 3600);
-	var m = Math.floor(d % 3600 / 60);
-	var s = Math.floor(d % 3600 % 60);
-	return (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m) + ":" + (s  < 10 ? "0" + s : s);
-}
-
-function updateElapsedTime(){
-	var now = new Date().getTime() / 1000;
-	var timeDiff = now - startTime;
-	$('#elapsedTime').text(formatTime(timeDiff));
-}
-
-$('#recButton').addClass("notRec");
-
-$('#recButton').click(function(){
-	if(!recording){
-		startRecording();
+		$('#recButton').addClass("notRec");	
+		return true;
 	}
 	else{
-		stopRecording();
+		return false;
 	}
-});
+}
 
-gui.Window.get().on('close', function() {
-	this.hide(); // Pretend to be closed already
-	stopRecording(); //Clean up/Stop recording
-	this.close(true);
-});
+// Run startup configuration
+startup();
