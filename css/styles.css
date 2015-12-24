@@ -3,6 +3,8 @@ html,body {
 	box-sizing: border-box;
 	font-family: sans-serif;
 	height:100%;
+	overflow:hidden;
+	margin:0;
 }
 *, *:before, *:after {
 	box-sizing: inherit;
@@ -11,8 +13,11 @@ html,body {
 label {
 	display:block;
 	margin:0 auto;
+	width: 100%;
 }
 
+
+/*Layout Styles*/
 .inputs{
 	width:70%;
 	height: 100%;
@@ -22,16 +27,19 @@ label {
 	width:29%;
 	height:100%;
 	float:right;
+	text-align: center;
 }
 
+
+/*Recording Button Styles*/
 button {
 	width: 35px;
 	height: 35px;
 	font-size: 0;
-	background-color: red;
+	background-color: darkred;
 	border: 0;
 	border-radius: 35px;
-	margin: 18px;
+	margin-top: 35px;
 	outline: none;
 }
 
@@ -40,6 +48,7 @@ button {
 }
 
 .Rec{
+	background-color: red;
 	-webkit-animation-name: pulse;
 	        animation-name: pulse;
 	-webkit-animation-duration: 3s;
@@ -73,4 +82,10 @@ button {
 	90%{
 		box-shadow: 0px 0px 5px 13px rgba(173,0,0,0);
 	}
+}
+
+/*Elapsed Time Styling*/
+#elapsedTime{
+	margin-top:10px;
+	display: inline-block;
 }
