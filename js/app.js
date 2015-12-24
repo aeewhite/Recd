@@ -17,6 +17,8 @@ var fs = require('fs');
 var request = require('request');
 
 var recording = false;
+var startTime;
+var timerUpdate;
 var stream;
 var writeStream;
 
@@ -30,7 +32,9 @@ function startRecording(){
 	stream = request(streamLocation);
 	writeStream = fs.createWriteStream(saveLocation);
 	
-
+	startTime = new Date().getTime() / 1000;
+	updateElapsedTime();
+	timerUpdate = setInterval(updateElapsedTime, 1000);
 	stream.on('data', function(data) {
 	  writeStream.write(data);
 	});
@@ -44,25 +48,48 @@ function startRecording(){
 		console.log(err);
 		writeStream.close();
 	});
+	recording = true;
+	$('#recButton').removeClass("notRec");
+	$('#recButton').addClass("Rec");
 }
 
 function stopRecording(){
-	stream.end();
+	if(recording){
+		stream.end();
+		recording = false;
+		$('#recButton').removeClass("Rec");
+		$('#recButton').addClass("notRec");
+	}
+	clearInterval(timerUpdate);
+}
+
+function formatTime(d) {
+	d = Number(d);
+	var h = Math.floor(d / 3600);
+	var m = Math.floor(d % 3600 / 60);
+	var s = Math.floor(d % 3600 % 60);
+	return (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m) + ":" + (s  < 10 ? "0" + s : s);
+}
+
+function updateElapsedTime(){
+	var now = new Date().getTime() / 1000;
+	var timeDiff = now - startTime;
+	$('#elapsedTime').text(formatTime(timeDiff));
 }
 
 $('#recButton').addClass("notRec");
 
 $('#recButton').click(function(){
-	if($('#recButton').hasClass('notRec')){
-		$('#recButton').removeClass("notRec");
-		$('#recButton').addClass("Rec");
-		recording = true;
+	if(!recording){
 		startRecording();
 	}
 	else{
-		$('#recButton').removeClass("Rec");
-		$('#recButton').addClass("notRec");
-		recording = false;
 		stopRecording();
 	}
+});
+
+gui.Window.get().on('close', function() {
+  this.hide(); // Pretend to be closed already
+  stopRecording(); //Clean up/Stop recording
+  this.close(true);
 });
