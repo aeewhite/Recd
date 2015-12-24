@@ -1,17 +1,38 @@
-// Load native UI library
-var gui = require('nw.gui');
+function startup (){
+	//  Load native UI library
+	var gui = require('nw.gui');
 
-// Create menu
-var menu = new gui.Menu({ type: 'menubar' });
+	// Create window object
+	var win = gui.Window.get();
 
-// create MacBuiltin menubar items
-menu.createMacBuiltin("Rec'd",{
-	hideEdit: false,
-	hideWindow: false
-});
+	// Create menu
+	var menu = new gui.Menu({ type: 'menubar' });
 
-// Append Menu to Window
-gui.Window.get().menu = menu;
+	// create MacBuiltin menubar items
+	menu.createMacBuiltin("Rec'd",{
+		hideEdit: false,
+		hideWindow: false
+	});
+
+	// Append Menu to Window
+	win.menu = menu;
+
+	win.on('close', function() {
+		this.hide(); // Pretend to be closed already
+		stopRecording(); //Clean up/Stop recording
+		this.close(true);
+	});
+
+	// Set up click handling for record button
+	$('#recButton').click(function(){
+		if(!streamRecorder.recording){
+			startRecording();
+		}
+		else{
+			stopRecording();
+		}
+	});
+}
 
 // Path is relative to html file
 var streamRecorder = require('../js/streamRecorder.js');
@@ -44,19 +65,5 @@ function stopRecording(){
 	$('#recButton').addClass("notRec");
 }
 
-$('#recButton').addClass("notRec");
-
-$('#recButton').click(function(){
-	if(!streamRecorder.recording){
-		startRecording();
-	}
-	else{
-		stopRecording();
-	}
-});
-
-gui.Window.get().on('close', function() {
-	this.hide(); // Pretend to be closed already
-	stopRecording(); //Clean up/Stop recording
-	this.close(true);
-});
+// Run startup configuration
+startup();
