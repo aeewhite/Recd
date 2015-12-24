@@ -50,12 +50,15 @@ function startStreamToFile (streamLocation, saveLocation) {
 }
 
 function stopStreamToFile(){
-	console.log('Closing Stream');
+	
 
 	// Close the network stream, which will close the filestream
 	if(exports.recording){
 		networkStream.end();
+		console.log('Closing Stream');
+	}
 	else{
+		console.log("Stream not open, not closing");
 		return false;
 	}
 	exports.recording = false;
