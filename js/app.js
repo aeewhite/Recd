@@ -6,8 +6,8 @@ var menu = new gui.Menu({ type: 'menubar' });
 
 // create MacBuiltin menubar items
 menu.createMacBuiltin("Rec'd",{
-    hideEdit: false,
-    hideWindow: false
+	hideEdit: false,
+	hideWindow: false
 });
 
 // Append Menu to Window
@@ -93,7 +93,7 @@ $('#recButton').click(function(){
 });
 
 gui.Window.get().on('close', function() {
-  this.hide(); // Pretend to be closed already
-  stopRecording(); //Clean up/Stop recording
-  this.close(true);
+	this.hide(); // Pretend to be closed already
+	stopRecording(); //Clean up/Stop recording
+	this.close(true);
 });
