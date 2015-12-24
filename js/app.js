@@ -4,7 +4,7 @@ var gui = require('nw.gui');
 // Create menu
 var menu = new gui.Menu({ type: 'menubar' });
 
-// create MacBuiltin
+// create MacBuiltin menubar items
 menu.createMacBuiltin("Rec'd",{
     hideEdit: false,
     hideWindow: false
