@@ -36,7 +36,7 @@ function startRecording(){
 	updateElapsedTime();
 	timerUpdate = setInterval(updateElapsedTime, 1000);
 	stream.on('data', function(data) {
-	  writeStream.write(data);
+		writeStream.write(data);
 	});
 
 	stream.on('end',function(){
