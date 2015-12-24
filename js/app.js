@@ -4,10 +4,10 @@ var gui = require('nw.gui');
 // Create menu
 var menu = new gui.Menu({ type: 'menubar' });
 
-// create MacBuiltin
+// create MacBuiltin menubar items
 menu.createMacBuiltin("Rec'd",{
-    hideEdit: false,
-    hideWindow: false
+	hideEdit: false,
+	hideWindow: false
 });
 
 // Append Menu to Window
@@ -29,6 +29,10 @@ function startRecording(){
 	var streamLocation = $('#fileURL').val();
 	var saveLocation = $('#savePath').val();
 
+	if(streamLocation === "" || saveLocation === ""){
+		return false;
+	}
+
 	stream = request(streamLocation);
 	writeStream = fs.createWriteStream(saveLocation);
 	
@@ -36,7 +40,7 @@ function startRecording(){
 	updateElapsedTime();
 	timerUpdate = setInterval(updateElapsedTime, 1000);
 	stream.on('data', function(data) {
-	  writeStream.write(data);
+		writeStream.write(data);
 	});
 
 	stream.on('end',function(){
@@ -89,7 +93,7 @@ $('#recButton').click(function(){
 });
 
 gui.Window.get().on('close', function() {
-  this.hide(); // Pretend to be closed already
-  stopRecording(); //Clean up/Stop recording
-  this.close(true);
+	this.hide(); // Pretend to be closed already
+	stopRecording(); //Clean up/Stop recording
+	this.close(true);
 });
