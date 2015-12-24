@@ -59,13 +59,15 @@ function startRecording(){
 }
 
 function stopRecording(){
-	streamRecorder.stopStreamToFile();
+	var closed = streamRecorder.stopStreamToFile();
 
-	// Stop updating timer
-	clearInterval(updater);
+	if(closed){
+		// Stop updating timer
+		clearInterval(updater);
 
-	$('#recButton').removeClass("Rec");
-	$('#recButton').addClass("notRec");
+		$('#recButton').removeClass("Rec");
+		$('#recButton').addClass("notRec");	
+	}
 }
 
 // Run startup configuration
