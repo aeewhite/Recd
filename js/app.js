@@ -55,6 +55,10 @@ function startRecording(){
 
 		$('#recButton').removeClass("notRec");
 		$('#recButton').addClass("Rec");
+		return true;
+	}
+	else{
+		return false;
 	}
 }
 
@@ -67,6 +71,10 @@ function stopRecording(){
 
 		$('#recButton').removeClass("Rec");
 		$('#recButton').addClass("notRec");	
+		return true;
+	}
+	else{
+		return false;
 	}
 }
 
