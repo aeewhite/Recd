@@ -1,9 +1,13 @@
+// Global Variables
+var win;
+
+// Called when app first loads
 function startup (){
 	//  Load native UI library
 	var gui = require('nw.gui');
 
-	// Create window object
-	var win = gui.Window.get();
+	// Assign window object
+	win = gui.Window.get();
 
 	// Create menu
 	var menu = new gui.Menu({ type: 'menubar' });
@@ -18,9 +22,7 @@ function startup (){
 	win.menu = menu;
 
 	win.on('close', function() {
-		this.hide(); // Pretend to be closed already
-		stopRecording(); //Clean up/Stop recording
-		this.close(true);
+		shutDown();
 	});
 
 	// Set up click handling for record button
@@ -32,6 +34,13 @@ function startup (){
 			stopRecording();
 		}
 	});
+}
+
+// To be called when app is closing down
+function shutDown(){
+	win.hide(); // Pretend to be closed already
+	stopRecording(); //Clean up/Stop recording
+	win.close(true);
 }
 
 // Path is relative to html file
