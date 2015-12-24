@@ -15,6 +15,8 @@ gui.Window.get().menu = menu;
 
 var fs = require('fs');
 var request = require('request');
+// Path is relative to html file
+var streamRecorder = require('../js/streamRecorder.js');
 
 var recording = false;
 var startTime;
