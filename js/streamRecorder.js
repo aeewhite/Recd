@@ -20,9 +20,11 @@ function startStreamToFile (streamLocation, saveLocation) {
 	networkStream = request(streamLocation);
 	fileStream = fs.createWriteStream(saveLocation);
 	exports.recording = true;
+	elapsedTime = 0;
 	startTime = getCurrentTimeInSeconds();
 
 	// Update the elapsed time every second
+	updateElapsedTime();
 	timerUpdate = setInterval(updateElapsedTime, 1000);
 
 	// Write date to file
