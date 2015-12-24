@@ -29,6 +29,10 @@ function startRecording(){
 	var streamLocation = $('#fileURL').val();
 	var saveLocation = $('#savePath').val();
 
+	if(streamLocation === "" || saveLocation === ""){
+		return false;
+	}
+
 	stream = request(streamLocation);
 	writeStream = fs.createWriteStream(saveLocation);
 	
