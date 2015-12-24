@@ -16,13 +16,14 @@ gui.Window.get().menu = menu;
 var fs = require('fs');
 var request = require('request');
 
+var recording = false;
 var stream;
 var writeStream;
 
 var streamLocation;
 var saveLocation;
 
-$('#start').click(function(){
+function startRecording(){
 	var streamLocation = $('#fileURL').val();
 	var saveLocation = $('#savePath').val();
 
@@ -43,11 +44,11 @@ $('#start').click(function(){
 		console.log(err);
 		writeStream.close();
 	});
-});
+}
 
-$('#stop').click(function(){
+function stopRecording(){
 	stream.end();
-});
+}
 
 $('#recButton').addClass("notRec");
 
@@ -55,9 +56,13 @@ $('#recButton').click(function(){
 	if($('#recButton').hasClass('notRec')){
 		$('#recButton').removeClass("notRec");
 		$('#recButton').addClass("Rec");
+		recording = true;
+		startRecording();
 	}
 	else{
 		$('#recButton').removeClass("Rec");
 		$('#recButton').addClass("notRec");
+		recording = false;
+		stopRecording();
 	}
-});	
+});
