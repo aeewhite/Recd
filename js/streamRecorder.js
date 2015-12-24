@@ -46,6 +46,7 @@ function startStreamToFile (streamLocation, saveLocation) {
 		console.log(err);
 		fileStream.close();
 	});
+	return true;
 }
 
 function stopStreamToFile(){
@@ -54,9 +55,12 @@ function stopStreamToFile(){
 	// Close the network stream, which will close the filestream
 	if(exports.recording){
 		networkStream.end();
+	else{
+		return false;
 	}
 	exports.recording = false;
 	clearInterval(timerUpdate);
+	return true;
 }
 
 function updateElapsedTime () {
