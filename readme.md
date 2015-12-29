@@ -1,6 +1,6 @@
 # Rec'd
 
-![Rec'd](icons/recd.png)
+![Rec'd](icons/recd_small.png)
 
 This is meant to be a crossplatform application for recording online mp3 streams to disk
 
