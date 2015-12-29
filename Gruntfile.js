@@ -8,7 +8,8 @@ module.exports = function(grunt) {
 						platforms: ['osx64'],
 						buildDir: './build', // Where the build version of my NW.js app is saved
 						buildType: "versioned",
-						version: 'v0.12.3'
+						version: 'v0.12.3',
+						macIcns: './recd.icns'
 					},
 					src: ['**/*',"!build/**/*","!node_modules/grunt/**/*","!node_modules/grunt-nw-builder/**/*","!cache/**/*"] // Your NW.js app
 				},
