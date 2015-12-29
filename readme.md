@@ -1,4 +1,6 @@
-# Audio Stream
+# Rec'd
+
+![Rec'd](icons/Recd.png)
 
 This is meant to be a crossplatform application for recording online mp3 streams to disk
 
