@@ -14,7 +14,7 @@
     "build": "grunt package"
   },
   "window": {
-    "icon": "./recd.png",
+    "icon": "./icons/recd.png",
     "title": "Rec'd",
     "toolbar": false,
     "resizable": false,
