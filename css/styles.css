@@ -41,6 +41,7 @@ button {
 	border-radius: 35px;
 	margin-top: 35px;
 	outline: none;
+	cursor:pointer;
 }
 
 .notRec{
