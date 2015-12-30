@@ -9,7 +9,7 @@ var name = packageJSON.name;
 var version = packageJSON.version;
 
 // Grunt build for mac
-//shell.exec('grunt package:mac');
+shell.exec('grunt package:mac');
 
 // Get the folder for the new version
 var binaryDirectory = __dirname + "/../build/" + name + " - v" + version + "/osx64/";
