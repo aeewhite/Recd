@@ -1,5 +1,7 @@
 node_modules
 *.mp3
+*.log
 build
 cache
+release
 .DS_STORE
