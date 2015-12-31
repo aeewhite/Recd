@@ -19,11 +19,21 @@ console.log(binaryDirectory);
 // Zip the .app file and name Rec'd-Mac-vX.X.X.zip
 shell.mkdir('-p',__dirname + "/../release");
 
+
 var archiver = require('archiver');
 var archive = archiver('zip');
 
 var zipName = __dirname+'/../release/'+name+'-Mac-v'+version+'.zip';
 console.log(zipName);
+
+// Remove any existing release
+try {
+	fs.accessSync(zipName, fs.F_OK);
+	// Delete the existing release
+	fs.unlinkSync(zipName);
+} catch(e){
+	// File does not exist
+}
 
 var writeStream = fs.createWriteStream(zipName);
 
