@@ -18,7 +18,8 @@ module.exports = function(grunt) {
 						platforms: ['win64'],
 						buildDir: './build', // Where the build version of my NW.js app is saved
 						buildType: "versioned",
-						version: 'v0.12.3'
+						version: 'v0.12.3',
+						winIco: './icons/recdIcon.ico'
 					},
 					src: ['**/*',"!build/**/*","!node_modules/grunt/**/*","!node_modules/grunt-nw-builder/**/*","!node_modules/shelljs/**/*","!node_modules/archiver/**/*","!cache/**/*","!scripts/**/*","!release/**/*"] // Your NW.js app
 				}
