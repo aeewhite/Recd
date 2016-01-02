@@ -15,7 +15,7 @@ Rec'd is a crossplatform application for recording online mp3 streams to disk
  - Head to releases page on [Github](https://github.com/aeewhite/Recd/releases) and download the latest version for Mac OS X or Windows
  - For Mac, just extract the zip and run the Recd.app file
  - For Windows, extract the zip and run Recd.exe
-	 - The windows version is not yet tested 
+	 - The Windows version is not yet tested
 
 ## Instructions
 
@@ -26,4 +26,4 @@ Rec'd is a crossplatform application for recording online mp3 streams to disk
 
 ## Building
 
-First run `npm install` to pick up the dependencies. I use [Grunt](http://gruntjs.com/) for building the [NW.js](https://github.com/nwjs/nw.js) apps for mac and windows. To build all for both platforms, run the package task with `grunt package`. To build only one platform, run `grunt package:mac` or `grunt package:win`. I've started writing release scripts for mac and windows that will run the build and then zip it all up for github releases. That can be run with `npm run release-mac` (and, when it's finished, `npm run release-win`). For running the project temporarily, you can use `npm start` which will start a NW instance (requires node-webkit to be installed).
+First run `npm install` to pick up the dependencies. I use [Grunt](http://gruntjs.com/) for building the [NW.js](https://github.com/nwjs/nw.js) apps for Mac and Windows. To build all for both platforms, run the package task with `grunt package` (or `npm run build`). To build only one platform, run `grunt package:mac` or `grunt package:win` (the Windows build requires wine to be installed if not on a Windows machine). I've started writing release scripts for Mac and Windows that will run the build and then zip it all up for github releases. That can be run with `npm run release-mac` (and, when it's finished, `npm run release-win`). For running the project temporarily, you can use `npm start` which will start a NW instance (requires node-webkit to be installed).
