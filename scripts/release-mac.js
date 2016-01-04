@@ -9,19 +9,19 @@ var name = packageJSON.name;
 var version = packageJSON.version;
 
 // Grunt build for mac
+console.log("\n> Building App\n");
 shell.exec('grunt package:mac');
 
 // Get the folder for the new version
 var binaryDirectory = __dirname + "/../build/" + name + " - v" + version + "/osx64/";
-console.log(binaryDirectory);
 
 
 // Create a DMG called Rec'd-Mac-vX.X.X.dmg
+console.log("\n> Creating DMG\n");
 shell.mkdir('-p',__dirname + "/../release");
 
 
 var dmgName = __dirname+'/../release/'+name+'-Mac-v'+version+'.dmg';
-console.log(dmgName);
 
 // Remove any existing release
 try {
@@ -34,7 +34,6 @@ try {
 
 
 var binaryPath = binaryDirectory + name + ".app";
-console.log(binaryPath);
 
 var appdmg = require('appdmg');
 var ee = appdmg({
@@ -63,13 +62,17 @@ var ee = appdmg({
 });
 
 ee.on('progress', function (info) {
-	console.log(info.current);
+	if(info.type == "step-begin"){
+		console.log(info.title);
+	}
 });
 
 ee.on('finish', function () {
-  console.log("Finished");
+	console.log("DMG created");
+	console.log("\n> Build Complete \n");
 });
 
 ee.on('error', function (err) {
-  console.log(err);
+	console.log("Error in creating dmg file");
+	console.log(err);
 });
