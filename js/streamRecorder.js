@@ -1,5 +1,6 @@
 var fs = require('fs'),
-	request = require('request');
+	request = require('request'),
+	throttle = require('stream-throttle');
 
 var networkStream, fileStream;
 
@@ -17,8 +18,8 @@ function startStreamToFile (streamLocation, saveLocation) {
 	}
 
 	// Create network streams
-	networkStream = request(streamLocation);
 	fileStream = fs.createWriteStream(saveLocation);
+	networkStream = request(streamLocation).pipe(new throttle.Throttle({rate:16000})).pipe(fileStream);
 	exports.recording = true;
 	elapsedTime = 0;
 	startTime = getCurrentTimeInSeconds();
@@ -26,14 +27,6 @@ function startStreamToFile (streamLocation, saveLocation) {
 	// Update the elapsed time every second
 	updateElapsedTime();
 	timerUpdate = setInterval(updateElapsedTime, 1000);
-
-	// Write date to file
-	networkStream.on('data', function(data) {
-		// Only save data if still supposed to be recording
-		if(exports.recording){
-			fileStream.write(data);
-		}
-	});
 
 	// Close up the file stream when stream is finished
 	networkStream.on('end',function(){
