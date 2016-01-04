@@ -16,44 +16,60 @@ var binaryDirectory = __dirname + "/../build/" + name + " - v" + version + "/osx
 console.log(binaryDirectory);
 
 
-// Zip the .app file and name Rec'd-Mac-vX.X.X.zip
+// Create a DMG called Rec'd-Mac-vX.X.X.dmg
 shell.mkdir('-p',__dirname + "/../release");
 
 
-var archiver = require('archiver');
-var archive = archiver('zip');
-
-var zipName = __dirname+'/../release/'+name+'-Mac-v'+version+'.zip';
-console.log(zipName);
+var dmgName = __dirname+'/../release/'+name+'-Mac-v'+version+'.dmg';
+console.log(dmgName);
 
 // Remove any existing release
 try {
-	fs.accessSync(zipName, fs.F_OK);
+	fs.accessSync(dmgName, fs.F_OK);
 	// Delete the existing release
-	fs.unlinkSync(zipName);
+	fs.unlinkSync(dmgName);
 } catch(e){
 	// File does not exist
 }
 
-var writeStream = fs.createWriteStream(zipName);
-
-writeStream.on('close', function() {
-	console.log(archive.pointer() + ' total bytes');
-	console.log('archiver has been finalized and the output file descriptor has closed.');
-});
-
-archive.on('error', function(err) {
-	console.log(err);
-	throw err;
-});
-
-archive.pipe(writeStream);
 
 var binaryPath = binaryDirectory + name + ".app";
 console.log(binaryPath);
 
-archive.bulk([
-	{ expand: true, cwd: binaryDirectory, src: ['**/*'] }
-]);
+var appdmg = require('appdmg');
+var ee = appdmg({
+	target: dmgName,
+	basepath: __dirname,
+	specification: {
+		"title": "Rec'd Installer",
+		"icon" : "../icons/recdIcon.icns",
+		"icon-size": 80,
+		"background": "../icons/white.jpg",
+		"contents": [
+			{
+				"x": 141,
+				"y": 140,
+				"type": "file",
+				"path": binaryPath
+			},
+			{
+				"x": 283,
+				"y": 140,
+				"type": "link",
+				"path": "/Applications"
+			},
+		]
+	}
+});
 
-archive.finalize();
+ee.on('progress', function (info) {
+	console.log(info.current);
+});
+
+ee.on('finish', function () {
+  console.log("Finished");
+});
+
+ee.on('error', function (err) {
+  console.log(err);
+});

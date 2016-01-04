@@ -11,7 +11,7 @@ module.exports = function(grunt) {
 						version: 'v0.12.3',
 						macIcns: './icons/recdIcon.icns'
 					},
-					src: ['**/*',"!build/**/*","!node_modules/grunt/**/*","!node_modules/grunt-nw-builder/**/*","!node_modules/shelljs/**/*","!node_modules/archiver/**/*","!cache/**/*","!scripts/**/*","!release/**/*"] // Your NW.js app
+					src: ['**/*',"!build/**/*","!node_modules/grunt/**/*","!node_modules/grunt-nw-builder/**/*","!node_modules/shelljs/**/*","!node_modules/archiver/**/*","!cache/**/*","!scripts/**/*","!release/**/*","!node_modules/appdmg/**/*"] // Your NW.js app
 				},
 				win:{
 					options: {
@@ -21,7 +21,7 @@ module.exports = function(grunt) {
 						version: 'v0.12.3',
 						winIco: './icons/recdIcon.ico'
 					},
-					src: ['**/*',"!build/**/*","!node_modules/grunt/**/*","!node_modules/grunt-nw-builder/**/*","!node_modules/shelljs/**/*","!node_modules/archiver/**/*","!cache/**/*","!scripts/**/*","!release/**/*"] // Your NW.js app
+					src: ['**/*',"!build/**/*","!node_modules/grunt/**/*","!node_modules/grunt-nw-builder/**/*","!node_modules/shelljs/**/*","!node_modules/archiver/**/*","!cache/**/*","!scripts/**/*","!release/**/*","!node_modules/appdmg/**/*"] // Your NW.js app
 				}
 			}
 	});
