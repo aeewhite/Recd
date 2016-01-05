@@ -9,17 +9,21 @@ function startup (){
 	// Assign window object
 	win = gui.Window.get();
 
-	// Create menu
-	var menu = new gui.Menu({ type: 'menubar' });
+	var os = require('os');
+	
+	if(os.platform() == "darwin"){
+		// Create menu
+		var menu = new gui.Menu({ type: 'menubar' });
 
-	// create MacBuiltin menubar items
-	menu.createMacBuiltin("Rec'd",{
-		hideEdit: false,
-		hideWindow: false
-	});
+		// create MacBuiltin menubar items
+		menu.createMacBuiltin("Rec'd",{
+			hideEdit: false,
+			hideWindow: false
+		});
 
-	// Append Menu to Window
-	win.menu = menu;
+		// Append Menu to Window
+		win.menu = menu;
+	}
 
 	win.on('close', function() {
 		shutDown();
