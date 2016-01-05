@@ -1,6 +1,6 @@
 {
   "name": "Rec'd",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Record audio from mp3 stream",
   "main": "./html/index.html",
   "author": "Andrew White",
@@ -20,7 +20,7 @@
     "toolbar": false,
     "resizable": false,
     "width": 500,
-    "height": 125,
+    "height": 150,
     "position": "mouse"
   },
   "dependencies": {
