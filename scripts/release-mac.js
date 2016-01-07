@@ -41,19 +41,19 @@ var ee = appdmg({
 	basepath: __dirname,
 	specification: {
 		"title": "Rec'd Installer",
-		"icon" : "../icons/recdIcon.icns",
-		"icon-size": 80,
-		"background": "../icons/white.jpg",
+		"icon" : "../icons/recdInstallerIcon.icns",
+		"icon-size": 100,
+		"background": "../icons/dmgBackground.png",
 		"contents": [
 			{
-				"x": 141,
-				"y": 140,
+				"x": 120,
+				"y": 100,
 				"type": "file",
 				"path": binaryPath
 			},
 			{
-				"x": 283,
-				"y": 140,
+				"x": 470,
+				"y": 100,
 				"type": "link",
 				"path": "/Applications"
 			},
