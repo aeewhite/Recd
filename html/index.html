@@ -6,9 +6,10 @@
 	</head>
 	<body>
 		<div class="inputs">
-			<label for="fileURL">Stream URL</label><input type="url" id="fileURL" placeholder="URL">
+			<label for="fileURL">Stream URL</label><br><input type="url" id="fileURL" placeholder="URL">
+			<label id="bitrateLabel" for="bitrate"><input type="url" id="bitrate" placeholder="Bitrate" value="128" size="3"> Kb/s</label>
 			<br>
-			<label for="savePath">Recording Location</label><input type="file" nwsaveas id="savePath" accept="audio/mpeg3">
+			<label for="savePath" id="saveLabel">Recording Location</label><br><input type="file" nwsaveas id="savePath" accept="audio/mpeg3">
 		</div>
 		<div class="stats">
 			<button type="button" id="recButton" class="notRec">Recording</button><br>
