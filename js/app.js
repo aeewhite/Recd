@@ -55,12 +55,15 @@ var updater;
 function startRecording(){
 	var streamLocation = $('#fileURL').val();
 	var saveLocation = $('#savePath').val();
+	var bitrate = $('#bitrate').val();
 
 	// Start the recording
-	var success = streamRecorder.startStreamToFile(streamLocation, saveLocation);
+	
+	var success = streamRecorder.startStreamToFile(streamLocation, saveLocation, bitrate);
 
 	// If starting the stream was successful
 	if(success){
+
 		// Update timer once a second
 		updater = setInterval(function(){
 			$('#elapsedTime').text(streamRecorder.getElapsedTime());
