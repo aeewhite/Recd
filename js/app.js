@@ -64,6 +64,7 @@ function startRecording(){
 	// If starting the stream was successful
 	if(success){
 
+		$('#elapsedTime').text(streamRecorder.getElapsedTime());
 		// Update timer once a second
 		updater = setInterval(function(){
 			$('#elapsedTime').text(streamRecorder.getElapsedTime());
