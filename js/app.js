@@ -69,6 +69,7 @@ function startRecording(){
 			$('#elapsedTime').text(streamRecorder.getElapsedTime());
 		},1000);
 
+		$(".inputs input").prop("disabled",true);
 		$('#recButton').removeClass("notRec");
 		$('#recButton').addClass("Rec");
 		return true;
@@ -85,6 +86,7 @@ function stopRecording(){
 		// Stop updating timer
 		clearInterval(updater);
 
+		$(".inputs input").prop("disabled",false);
 		$('#recButton').removeClass("Rec");
 		$('#recButton').addClass("notRec");	
 		return true;
