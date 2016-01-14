@@ -8,18 +8,31 @@ var startTime, elapsedTime, timeUpdater;
 
 var recording = false;
 
-function startStreamToFile (streamLocation, saveLocation) {
+/**
+ * Creates a stream and returns success
+ * @param  {String} streamLocation the location to stream
+ * @param  {String} saveLocation   the location to record the stream to
+ * @param  {Integer} bitrate        bitrate of stream in Kb/s
+ * @return {Boolean}                Whether the stream was created or not
+ */
+function startStreamToFile (streamLocation, saveLocation, bitrate) {
 
 	console.log("Starting Stream");
 	
-	//If either parameter is blank, give up
+	// If either parameter is blank, give up
 	if(streamLocation === "" || saveLocation === ""){
 		return false;
 	}
 
+	// Calculate bitrate
+	var recordingBitrate = (bitrate * 1000) / 8;
+
 	// Create network streams
 	fileStream = fs.createWriteStream(saveLocation);
-	networkStream = request(streamLocation).pipe(new throttle.Throttle({rate:16000})).pipe(fileStream);
+	networkStream = request
+					.get(streamLocation)
+					.pipe(new throttle.Throttle({rate:recordingBitrate}))
+					.pipe(fileStream);
 	exports.recording = true;
 	elapsedTime = 0;
 	startTime = getCurrentTimeInSeconds();
@@ -43,8 +56,6 @@ function startStreamToFile (streamLocation, saveLocation) {
 }
 
 function stopStreamToFile(){
-	
-
 	// Close the network stream, which will close the filestream
 	if(exports.recording){
 		networkStream.end();
@@ -59,14 +70,14 @@ function stopStreamToFile(){
 	return true;
 }
 
-function updateElapsedTime () {
+function updateElapsedTime() {
 	var now = getCurrentTimeInSeconds();
 	var timeDifference = now - startTime;
 	elapsedTime = timeDifference;
 	return elapsedTime;
 }
 
-function getCurrentTimeInSeconds () {
+function getCurrentTimeInSeconds() {
 	return new Date().getTime() / 1000;
 }
 
