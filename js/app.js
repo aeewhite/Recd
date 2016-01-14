@@ -38,6 +38,24 @@ function startup (){
 			stopRecording();
 		}
 	});
+
+	// Attach handler for guessing bitrate
+	$('#fileURL').on("change input",function(){
+		var url = $('#fileURL').val();
+		
+		// Does url include HD-like words?
+		if(stringContainsAny(url, ["hd","high","hq"])){
+			// Then set to 128
+			$('#bitrate').val("128");
+		}
+
+		// Does url include SD-like words?
+		if(stringContainsAny(url, ["sd","low"])){
+			// Then set to 64
+			$('#bitrate').val("64");
+		}
+		
+	});
 }
 
 // To be called when app is closing down
@@ -60,7 +78,7 @@ function startRecording(){
 	// Start the recording
 	
 	var success = streamRecorder.startStreamToFile(streamLocation, saveLocation, bitrate);
-
+	console.log("Success: " + success);
 	// If starting the stream was successful
 	if(success){
 
@@ -95,6 +113,16 @@ function stopRecording(){
 	else{
 		return false;
 	}
+}
+
+function stringContainsAny(word, wordArray){
+	var candidate;
+	for(candidate in wordArray){
+		if(word.toLowerCase().indexOf(wordArray[candidate].toLowerCase())>=0){
+			return true;
+		}
+	}
+	return false;
 }
 
 // Run startup configuration
