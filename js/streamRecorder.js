@@ -39,7 +39,7 @@ function startStreamToFile (streamLocation, saveLocation, bitrate) {
 
 	// Update the elapsed time every second
 	updateElapsedTime();
-	timerUpdate = setInterval(updateElapsedTime, 1000);
+	timerUpdate = setInterval(updateElapsedTime, 500);
 
 	// Close up the file stream when stream is finished
 	networkStream.on('end',function(){
