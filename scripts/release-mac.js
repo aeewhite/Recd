@@ -43,7 +43,7 @@ var ee = appdmg({
 		"title": "Rec'd Installer",
 		"icon" : "../icons/recdInstallerIcon.icns",
 		"icon-size": 100,
-		"background": "../icons/dmgBackground.png",
+		"background": "../images/dmgBackground.png",
 		"contents": [
 			{
 				"x": 120,

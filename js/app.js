@@ -1,5 +1,6 @@
 // Global Variables
-var win;
+var win,
+	fs = require('fs');
 
 // Called when app first loads
 function startup (){
@@ -56,6 +57,47 @@ function startup (){
 		}
 		
 	});
+
+
+
+	// Setup drag and drop handling
+	$(window).on('load', function() {
+		// Tells the browser that we *can* drop on this target
+		$('html').on('dragenter',function(){
+			$('#dropzone').show();
+		});
+		$('#dropzone').on('dragover',function(e){
+			e.preventDefault();
+			e.stopPropagation();
+		});
+		$('#dropzone').on('dragenter',function(e){
+			e.preventDefault();
+			e.stopPropagation();
+			$('#dropzone').addClass('dropOver');
+			$('#dragon').show().animate({
+				bottom: 0
+			},200);
+		});
+		$('#dropzone').on('dragleave',function(e){
+			e.preventDefault();
+			e.stopPropagation();
+			$('#dropzone').removeClass('dropOver');
+			$('#dropzone').hide();
+			$('#dragon').hide().css('bottom',-36);
+		});
+		$('#dropzone').on('drop',function(e){
+			e.preventDefault();
+			e.stopPropagation();
+			$('#dropzone').removeClass('dropOver');
+			$('#dropzone').hide();
+			$('#dragon').hide().css('bottom',-36);
+			if(e.originalEvent.dataTransfer){
+				var url = processM3UFile(e.originalEvent.dataTransfer.files[0].path);
+				$('#fileURL').val(url);
+			}
+		});
+	});
+
 }
 
 // To be called when app is closing down
@@ -123,6 +165,11 @@ function stringContainsAny(word, wordArray){
 		}
 	}
 	return false;
+}
+
+function processM3UFile(path){
+	var url = fs.readFileSync(path).toString().split('\n')[0].trim();
+	return url;
 }
 
 // Run startup configuration
