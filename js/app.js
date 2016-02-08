@@ -93,6 +93,7 @@ function startup (){
 			$('#dragon').hide().css('bottom',-36);
 			if(e.originalEvent.dataTransfer){
 				var url = processM3UFile(e.originalEvent.dataTransfer.files[0].path);
+				if(e.originalEvent.dataTransfer.files[0].path.endsWith(".m3u"))
 				$('#fileURL').val(url);
 			}
 		});
