@@ -90,3 +90,18 @@ button {
 	margin-top:10px;
 	display: inline-block;
 }
+
+/*Drap and Drop Stuffs*/
+#dropzone{
+	display:none;
+	padding-top:50px;
+	color:white;
+	text-align:center;
+	position: absolute;
+	width:100%;
+	height:100%;
+}
+.dropOver{
+	border:6px dashed black;
+	background-color:rgba(0,0,0,.5);
+}

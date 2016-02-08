@@ -56,6 +56,35 @@ function startup (){
 		}
 		
 	});
+
+
+
+	// Setup drag and drop handling
+	$(window).on('load', function() {
+		// Tells the browser that we *can* drop on this target
+		$('html').on('dragenter',function(){
+			$('#dropzone').show();
+		});
+		$('#dropzone').on('dragover',function(e){
+				e.preventDefault();
+				e.stopPropagation();
+			}
+		);
+		$('#dropzone').on('dragenter',function(e){
+				e.preventDefault();
+				e.stopPropagation();
+				$('#dropzone').addClass('dropOver');
+			}
+		);
+		$('#dropzone').on('dragleave',function(e){
+				e.preventDefault();
+				e.stopPropagation();
+				$('#dropzone').removeClass('dropOver');
+				$('#dropzone').hide();
+			}
+		);
+	});
+
 }
 
 // To be called when app is closing down
