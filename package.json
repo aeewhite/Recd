@@ -12,7 +12,8 @@
   "scripts": {
     "start": "nw .",
     "build": "grunt package",
-    "release-mac": "node scripts/release-mac.js"
+    "release-mac": "node scripts/release-mac.js",
+    "release-win": "node scripts/release-win.js"
   },
   "window": {
     "icon": "./icons/recd.png",
