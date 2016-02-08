@@ -105,3 +105,9 @@ button {
 	border:6px dashed black;
 	background-color:rgba(0,0,0,.5);
 }
+#dragon{
+	display:none;
+	position:absolute;
+	bottom:-36px;
+	right:35px;
+}
