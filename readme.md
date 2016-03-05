@@ -20,7 +20,7 @@ Rec'd is a crossplatform application for recording online mp3 streams to disk
 ## Instructions
 
  1. Enter url of mp3 stream in the URL box
-	 - This can be found as the first item in an m3u file that contains the stream
+	 - If you have an m3u file for the stream, drag the file into Rec'd to get the url
  2. Select an .mp3 file to save the stream to (must be .mp3)
  3. Press the record button
 
