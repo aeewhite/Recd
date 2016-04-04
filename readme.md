@@ -24,6 +24,9 @@ Rec'd is a crossplatform application for recording online mp3 streams to disk
  2. Select an .mp3 file to save the stream to (must be .mp3)
  3. Press the record button
 
+Important: If your computer sleeps or loses network connection, Rec'd will stop recording
+ 
+
 ## Building
 
 First run `npm install` to pick up the dependencies. I use [Grunt](http://gruntjs.com/) for building the [NW.js](https://github.com/nwjs/nw.js) apps for Mac and Windows. To build all for both platforms, run the package task with `grunt package` (or `npm run build`). To build only one platform, run `grunt package:mac` or `grunt package:win` (the Windows build requires wine to be installed if not on a Windows machine). There are release scripts for Mac and Windows that will run the build and then zip it all up for github releases. Those can be run with `npm run release-mac` or `npm run release-win`. For running the project temporarily, you can use `npm start` which will start a NW instance (requires node-webkit to be installed).
