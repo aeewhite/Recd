@@ -15,7 +15,7 @@ Rec'd is a crossplatform application for recording online mp3 streams to disk
  - Head to releases page on [Github](https://github.com/aeewhite/Recd/releases) and download the latest version for Mac OS X or Windows
  - For Mac, mount the .dmg and copy Recd.app to your applications folder, or if you use homebrew cask: `brew cask install recd`
  - For Windows, extract the zip and run Recd.exe
-	 - The Windows version is not yet tested
+	 - The Windows version is not well tested
 
 ## Instructions
 
