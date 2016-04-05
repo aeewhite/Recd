@@ -129,11 +129,13 @@ function startRecording(){
 		// Update timer once a second
 		updater = setInterval(function(){
 			$('#elapsedTime').text(streamRecorder.getElapsedTime());
+			checkRecordingStatus();
 		},1000);
 
 		$(".inputs input").prop("disabled",true);
 		$('#recButton').removeClass("notRec");
 		$('#recButton').addClass("Rec");
+
 		return true;
 	}
 	else{
@@ -144,17 +146,17 @@ function startRecording(){
 function stopRecording(){
 	var closed = streamRecorder.stopStreamToFile();
 
-	if(closed){
-		// Stop updating timer
-		clearInterval(updater);
+	// Stop updating timer
+	clearInterval(updater);
 
-		$(".inputs input").prop("disabled",false);
-		$('#recButton').removeClass("Rec");
-		$('#recButton').addClass("notRec");	
-		return true;
-	}
-	else{
-		return false;
+	$(".inputs input").prop("disabled",false);
+	$('#recButton').removeClass("Rec");
+	$('#recButton').addClass("notRec");
+}
+
+function checkRecordingStatus(){
+	if(!streamRecorder.recording){
+		stopRecording();
 	}
 }
 

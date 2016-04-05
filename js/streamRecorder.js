@@ -2,7 +2,7 @@ var fs = require('fs'),
 	request = require('request'),
 	throttle = require('stream-throttle');
 
-var networkStream, fileStream;
+var networkStream, fileStream, writeStream;
 
 var startTime, elapsedTime, timeUpdater;
 
@@ -30,7 +30,9 @@ function startStreamToFile (streamLocation, saveLocation, bitrate) {
 	// Create network streams
 	fileStream = fs.createWriteStream(saveLocation);
 	networkStream = request
-					.get(streamLocation)
+					.get(streamLocation);
+
+	writeStream = networkStream
 					.pipe(new throttle.Throttle({rate:recordingBitrate}))
 					.pipe(fileStream);
 	exports.recording = true;
@@ -43,14 +45,14 @@ function startStreamToFile (streamLocation, saveLocation, bitrate) {
 
 	// Close up the file stream when stream is finished
 	networkStream.on('end',function(){
-		fileStream.end();
+		stopStreamToFile();
 	});
 
 	// Handle network streaming errors
 	networkStream.on('error', function(err) {
 		console.log('something is wrong :( ');
 		console.log(err);
-		fileStream.close();
+		stopStreamToFile();
 	});
 	return true;
 }
@@ -58,7 +60,12 @@ function startStreamToFile (streamLocation, saveLocation, bitrate) {
 function stopStreamToFile(){
 	// Close the network stream, which will close the filestream
 	if(exports.recording){
-		networkStream.end();
+		if(networkStream.close){
+			networkStream.close();
+		}
+		if(writeStream.close){
+			writeStream.close();
+		}
 		console.log('Closing Stream');
 	}
 	else{
